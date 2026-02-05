@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import Quagga from 'quagga';
+import Quagga from '@ericblade/quagga2';
 import { Camera, X } from 'lucide-react';
 import Button from './Button';
 
