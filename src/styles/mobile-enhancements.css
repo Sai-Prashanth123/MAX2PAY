@@ -1,0 +1,530 @@
+/**
+ * Mobile Enhancements
+ * Ensures all touch targets meet WCAG 2.1 Level AAA standards (44x44px minimum)
+ * Optimizes forms and interactive elements for mobile devices
+ * Note: This file is imported after index.css which contains @tailwind directives
+ */
+
+/* ============================================
+   TOUCH TARGET ENHANCEMENTS
+   ============================================ */
+
+/* Ensure all buttons meet minimum touch target size */
+/* Removed @layer components to avoid conflicts - using plain CSS instead */
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medium transition-colors duration-200;
+    min-height: 44px;
+    min-width: 44px;
+    touch-action: manipulation; /* Removes 300ms tap delay */
+  }
+
+  /* Button size variants with touch-friendly dimensions */
+  .btn-sm {
+    @apply px-3 py-2 text-sm;
+    min-height: 44px; /* Still maintain minimum touch target */
+  }
+
+  .btn-md {
+    @apply px-4 py-2.5;
+    min-height: 44px;
+  }
+
+  .btn-lg {
+    @apply px-6 py-3 text-lg;
+    min-height: 48px;
+  }
+
+  /* Icon-only buttons */
+  .btn-icon {
+    @apply p-2.5;
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Full-width mobile buttons */
+  .btn-mobile-full {
+    @apply w-full;
+    min-height: 48px;
+  }
+
+  /* ============================================
+     FORM INPUT ENHANCEMENTS
+     ============================================ */
+
+  /* Input fields with mobile-friendly sizing */
+  .input {
+    @apply w-full px-4 py-3 border border-gray-300 rounded-lg;
+    @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent;
+    min-height: 44px;
+    font-size: 16px; /* Prevents iOS zoom on focus */
+    touch-action: manipulation;
+  }
+
+  /* Textarea with mobile optimization */
+  textarea.input {
+    min-height: 100px;
+    resize: vertical;
+  }
+
+  /* Select dropdowns */
+  select.input {
+    min-height: 44px;
+    font-size: 16px;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 40px;
+  }
+
+  /* ============================================
+     CHECKBOX AND RADIO ENHANCEMENTS
+     ============================================ */
+
+  /* Checkbox/Radio wrapper for larger touch area */
+  .checkbox-wrapper,
+  .radio-wrapper {
+    @apply flex items-center;
+    min-height: 44px;
+    padding: 10px 0;
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+
+  /* Custom checkbox styling */
+  .checkbox-input,
+  .radio-input {
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+    cursor: pointer;
+  }
+
+  /* Label with adequate touch area */
+  .checkbox-label,
+  .radio-label {
+    @apply flex items-center;
+    min-height: 44px;
+    padding: 10px 0;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  /* ============================================
+     LINK ENHANCEMENTS
+     ============================================ */
+
+  /* Clickable links with minimum touch target */
+  .link-touch {
+    @apply inline-block;
+    min-height: 44px;
+    padding: 10px 0;
+    touch-action: manipulation;
+  }
+
+  /* Navigation links */
+  .nav-link {
+    @apply block;
+    min-height: 44px;
+    padding: 12px 16px;
+    touch-action: manipulation;
+  }
+
+  /* ============================================
+     MOBILE-SPECIFIC UTILITIES
+     ============================================ */
+
+  /* Mobile padding */
+  .mobile-padding {
+    @apply px-4 py-4;
+  }
+
+  @screen md {
+    .mobile-padding {
+      @apply px-6 py-6;
+    }
+  }
+
+  @screen lg {
+    .mobile-padding {
+      @apply px-8 py-8;
+    }
+  }
+
+  /* Mobile text sizing */
+  .mobile-text {
+    font-size: 16px; /* Prevents iOS zoom */
+  }
+
+  @screen md {
+    .mobile-text {
+      font-size: 1rem;
+    }
+  }
+
+  /* Mobile headings */
+  .mobile-heading {
+    @apply text-xl font-bold;
+  }
+
+  @screen md {
+    .mobile-heading {
+      @apply text-2xl;
+    }
+  }
+
+  @screen lg {
+    .mobile-heading {
+      @apply text-3xl;
+    }
+  }
+
+  /* ============================================
+     SPACING ENHANCEMENTS (8-POINT SYSTEM)
+     ============================================ */
+
+  /* MOBILE STANDARD: 8-point spacing system only */
+  /* Allowed values: 8px, 16px, 24px, 32px */
+
+  /* Minimum spacing between touch targets */
+  .touch-spacing {
+    margin: 8px 0;
+  }
+
+  /* Form field spacing */
+  .form-field {
+    margin-bottom: 16px;
+  }
+
+  /* Button group spacing - FIXED: 12px → 16px */
+  .button-group > * + * {
+    margin-left: 16px;
+  }
+
+  .button-group-vertical > * + * {
+    margin-top: 16px;
+  }
+
+  /* ============================================
+     MOBILE FORM LAYOUTS
+     ============================================ */
+
+  /* Stack form fields on mobile */
+  .form-grid {
+    @apply grid grid-cols-1 gap-4;
+  }
+
+  @screen md {
+    .form-grid {
+      @apply grid-cols-2;
+    }
+  }
+
+  /* Full-width form on mobile */
+  .form-mobile {
+    @apply w-full;
+  }
+
+  @screen md {
+    .form-mobile {
+      @apply max-w-2xl mx-auto;
+    }
+  }
+
+  /* ============================================
+     KEYBOARD HANDLING
+     ============================================ */
+
+  /* Prevent zoom on input focus (iOS) */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="password"],
+  input[type="url"],
+  input[type="search"],
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+
+  /* Scroll to input when keyboard appears */
+  input:focus,
+  textarea:focus,
+  select:focus {
+    scroll-margin-top: 100px;
+  }
+
+  /* ============================================
+     ACCESSIBILITY ENHANCEMENTS
+     ============================================ */
+
+  /* Focus visible for keyboard navigation */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-blue-500 ring-offset-2;
+  }
+
+  /* Skip to content link */
+  .skip-to-content {
+    @apply sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4;
+    @apply bg-blue-600 text-white px-4 py-2 rounded-lg;
+    min-height: 44px;
+    z-index: 9999;
+  }
+
+  /* ============================================
+     MOBILE NAVIGATION
+     ============================================ */
+
+  /* Hamburger menu button */
+  .hamburger-btn {
+    width: 44px;
+    height: 44px;
+    @apply flex items-center justify-center;
+    touch-action: manipulation;
+  }
+
+  /* Mobile menu items */
+  .mobile-menu-item {
+    @apply block w-full text-left;
+    min-height: 48px;
+    padding: 12px 16px;
+    touch-action: manipulation;
+  }
+
+  /* ============================================
+     CARD AND CONTAINER ENHANCEMENTS
+     ============================================ */
+
+  /* Mobile-friendly cards */
+  .card-mobile {
+    @apply bg-white rounded-lg shadow-sm border border-gray-200;
+    padding: 16px;
+  }
+
+  @screen md {
+    .card-mobile {
+      padding: 24px;
+    }
+  }
+
+  /* Clickable cards */
+  .card-clickable {
+    @apply cursor-pointer transition-all duration-200;
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+
+  .card-clickable:active {
+    @apply scale-98;
+  }
+
+  /* ============================================
+     TABLE ENHANCEMENTS
+     ============================================ */
+
+  /* Mobile-responsive tables */
+  .table-mobile {
+    @apply w-full overflow-x-auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table-mobile table {
+    @apply min-w-full;
+  }
+
+  /* Table action buttons */
+  .table-action-btn {
+    @apply inline-flex items-center justify-center;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 10px;
+    touch-action: manipulation;
+  }
+
+  /* ============================================
+     MODAL AND OVERLAY ENHANCEMENTS
+     ============================================ */
+
+  /* Modal close button */
+  .modal-close-btn {
+    width: 44px;
+    height: 44px;
+    @apply flex items-center justify-center;
+    touch-action: manipulation;
+  }
+
+  /* Modal content padding */
+  .modal-content-mobile {
+    padding: 20px;
+  }
+
+  @screen md {
+    .modal-content-mobile {
+      padding: 32px;
+    }
+  }
+
+  /* ============================================
+     LOADING AND FEEDBACK
+     ============================================ */
+
+  /* Loading spinner with adequate size */
+  .spinner-mobile {
+    width: 44px;
+    height: 44px;
+  }
+
+  /* Toast notifications */
+  .toast-mobile {
+    min-height: 44px;
+    padding: 12px 16px;
+    @apply rounded-lg shadow-lg;
+  }
+
+  /* ============================================
+     UTILITY CLASSES
+     ============================================ */
+
+  /* Prevent text selection on buttons */
+  .no-select {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+
+  /* Remove tap highlight on mobile */
+  .no-tap-highlight {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Smooth scrolling */
+  .smooth-scroll {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* ============================================
+     RESPONSIVE VISIBILITY
+     ============================================ */
+
+  /* Show only on mobile */
+  .mobile-only {
+    @apply block;
+  }
+
+  @screen md {
+    .mobile-only {
+      @apply hidden;
+    }
+  }
+
+  /* Hide on mobile */
+  .mobile-hidden {
+    @apply hidden;
+  }
+
+  @screen md {
+    .mobile-hidden {
+      @apply block;
+    }
+  }
+
+/* ============================================
+   MEDIA QUERY SPECIFIC ENHANCEMENTS
+   ============================================ */
+
+/* Extra small devices (portrait phones) */
+@media (max-width: 374px) {
+  .btn {
+    font-size: 14px;
+  }
+
+  .mobile-padding {
+    padding: 12px;
+  }
+}
+
+/* Small devices (landscape phones) */
+@media (min-width: 375px) and (max-width: 767px) {
+  /* Optimize for iPhone SE, iPhone 12, Galaxy S21 */
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* Medium devices (tablets) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Optimize for iPad Pro portrait */
+  .form-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Landscape orientation adjustments */
+@media (orientation: landscape) and (max-height: 500px) {
+  /* Reduce padding in landscape mode */
+  .mobile-padding {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  /* Adjust modal height */
+  .modal-content-mobile {
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+}
+
+/* ============================================
+   ANIMATION ENHANCEMENTS
+   ============================================ */
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.3s ease-out forwards;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+  /* Hide interactive elements when printing */
+  .btn,
+  .hamburger-btn,
+  .mobile-menu-item {
+    display: none;
+  }
+
+  /* Optimize for print */
+  body {
+    font-size: 12pt;
+  }
+}
