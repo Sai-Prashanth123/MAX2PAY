@@ -23,6 +23,7 @@ const Login = () => {
   const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
   const [forgotPasswordEmail, setForgotPasswordEmail] = useState('');
   const [forgotPasswordLoading, setForgotPasswordLoading] = useState(false);
+  const [loginErrorMessage, setLoginErrorMessage] = useState('');
 
   const handleRoleChange = (e) => {
     const role = e.target.value;
@@ -68,6 +69,7 @@ const Login = () => {
     
     setLoading(true);
     setShowErrorModal(false);
+    setLoginErrorMessage('');
 
     try {
       const result = await login(formData);
@@ -75,10 +77,12 @@ const Login = () => {
       if (result && result.success) {
         navigate('/dashboard');
       } else {
+        setLoginErrorMessage(result?.error || 'Invalid email or password. Please check your credentials and try again.');
         setShowErrorModal(true);
       }
     } catch (error) {
       console.error('Login error:', error);
+      setLoginErrorMessage(error.response?.data?.message || error.message || 'Login failed. Please check your credentials and try again.');
       setShowErrorModal(true);
     } finally {
       setLoading(false);
@@ -248,7 +252,7 @@ const Login = () => {
           </div>
           <h3 className="text-xl font-bold text-slate-900 mb-2">Login Failed</h3>
           <p className="text-slate-600 mb-4">
-            Invalid email or password. Please check your credentials and try again.
+            {loginErrorMessage || 'Invalid email or password. Please check your credentials and try again.'}
           </p>
           <p className="text-sm text-slate-500 mb-4">
             If you've forgotten your password, click "Forgot?" on the login form.
