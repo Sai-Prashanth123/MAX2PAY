@@ -7,6 +7,7 @@ import Select from '../components/common/Select';
 import Modal from '../components/common/Modal';
 import { Home, AlertCircle, ArrowRight, Package } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { API_URL } from '../utils/config';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -95,7 +96,7 @@ const Login = () => {
     setForgotPasswordLoading(true);
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5001/api'}/auth/forgot-password`, {
+      const response = await fetch(`${API_URL}/auth/forgot-password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
