@@ -15,23 +15,27 @@ export default defineConfig({
     })
   ],
   build: {
-    // Enable source maps for debugging (disable in production)
     sourcemap: false,
-    // Optimize chunk size
     rollupOptions: {
+      // Load heavy libraries from CDN instead of bundling them
+      external: ['tesseract.js', 'xlsx', '@ericblade/quagga2'],
       output: {
+        globals: {
+          'tesseract.js': 'Tesseract',
+          'xlsx': 'XLSX',
+          '@ericblade/quagga2': 'Quagga',
+        },
         manualChunks: {
-          // Vendor chunks
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          'ui-vendor': ['lucide-react'],
-          'utils': ['axios'],
+          'ui-vendor': ['lucide-react', 'recharts'],
+          'supabase': ['@supabase/supabase-js'],
+          'pdf': ['jspdf', 'jspdf-autotable'],
+          'utils': ['axios', 'date-fns'],
         },
       },
     },
-    // Chunk size warnings
-    chunkSizeWarningLimit: 500,
+    chunkSizeWarningLimit: 1000,
   },
-  // Optimize dependencies
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom'],
   },
