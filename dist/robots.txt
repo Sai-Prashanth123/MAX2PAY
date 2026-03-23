@@ -1,0 +1,64 @@
+# robots.txt for Max2Pay Warehouse Management System
+# https://max2pay.com/robots.txt
+
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /api/
+Disallow: /login
+Disallow: /register
+Disallow: /2fa-setup
+Disallow: /profile
+Disallow: /orders/
+Disallow: /clients/
+Disallow: /products/
+Disallow: /inventory/
+Disallow: /invoices/
+Disallow: /inbound/
+Disallow: /reports/
+
+# Allow public pages
+Allow: /
+Allow: /about
+Allow: /contact
+Allow: /features
+Allow: /pricing
+
+# Sitemap location
+Sitemap: https://max2pay.com/sitemap.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+Disallow: /dashboard/
+Disallow: /api/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /dashboard/
+Disallow: /api/
+
+User-agent: Slurp
+Allow: /
+Disallow: /dashboard/
+Disallow: /api/
+
+# Block bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /

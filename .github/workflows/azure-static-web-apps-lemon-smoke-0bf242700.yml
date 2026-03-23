@@ -20,25 +20,6 @@ jobs:
           submodules: true
           lfs: false
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-
-      - name: Install and Build
-        env:
-          VITE_API_URL: https://max2pay-backend-chd6g3cccuejgabs.eastasia-01.azurewebsites.net/api
-          VITE_BACKEND_URL: https://max2pay-backend-chd6g3cccuejgabs.eastasia-01.azurewebsites.net
-          VITE_SUPABASE_URL: https://iwshwxfmhpbpivelforo.supabase.co
-          VITE_SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml3c2h3eGZtaHBicGl2ZWxmb3JvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyNzAwNTIsImV4cCI6MjA4OTg0NjA1Mn0.g5JfEomiPoW1xHbU0fSOy11dJWubsjv_9-aHABsUcU0
-          NODE_OPTIONS: --max_old_space_size=4096
-        run: |
-          set -e
-          npm ci
-          npm run build
-          ls -la dist/index.html
-          rm -rf node_modules
-
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
