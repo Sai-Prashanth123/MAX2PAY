@@ -17,15 +17,9 @@ export default defineConfig({
   build: {
     sourcemap: false,
     rollupOptions: {
-      // Load heavy libraries from CDN instead of bundling them
-      external: ['tesseract.js', 'xlsx', '@ericblade/quagga2'],
       output: {
-        globals: {
-          'tesseract.js': 'Tesseract',
-          'xlsx': 'XLSX',
-          '@ericblade/quagga2': 'Quagga',
-        },
         manualChunks: {
+          'xlsx': ['xlsx'],
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
           'ui-vendor': ['lucide-react', 'recharts'],
           'supabase': ['@supabase/supabase-js'],
